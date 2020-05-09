@@ -81,7 +81,7 @@ Resources:
                       #check repository in destation registry
                       if ! repoMsg=$(aws ecr describe-repositories --repository-names $repoName --region $dstRegion 2>&1); then
                         echo -n "$repoName does not exists in ECR@$dstRegion, creating... "
-                        aws ecr create-repository --repository-name $repoName --region $dstRegion > /dev/null
+                        aws ecr create-repository --repository-name $repoName --image-scanning-configuration scanOnPush=true --region $dstRegion > /dev/null
                         echo "done."
                       fi
                     }
